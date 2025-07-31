@@ -1,18 +1,491 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zhang Haochen | 个人主页</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1 { color: #333; }
-        .project { margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 5px; }
+    <title>张昊晨 | 个人主页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .transition-custom {
+                transition: all 0.3s ease;
+            }
+            .hover-lift {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .hover-lift:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .lang-en {
+                display: none;
+            }
+        }
     </style>
 </head>
-<body>
-    <h1>Hello, I'm Zhang Haochen!</h1>
-    <p>Welcome to my GitHub portfolio. I'm a PhD student and a developer interested in numerical methods, computational technologies and AI.</p>
-    
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- 导航栏 -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-primary">
+                <span class="lang-zh">张昊晨</span> 
+                <span class="lang-en">Zhang Haochen</span>
+                <span class="text-base opacity-80 ml-1">
+                    <span class="lang-zh">Zhang Haochen</span>
+                    <span class="lang-en">张昊晨</span>
+                </span>
+            </a>
+            <div class="flex items-center space-x-6">
+                <div class="hidden md:flex space-x-6">
+                    <a href="#about" class="text-gray-600 hover:text-primary transition-custom">
+                        <span class="lang-zh">关于我</span>
+                        <span class="lang-en">About</span>
+                    </a>
+                    <a href="#skills" class="text-gray-600 hover:text-primary transition-custom">
+                        <span class="lang-zh">技能</span>
+                        <span class="lang-en">Skills</span>
+                    </a>
+                    <a href="#projects" class="text-gray-600 hover:text-primary transition-custom">
+                        <span class="lang-zh">论文发表</span>
+                        <span class="lang-en">Publications</span>
+                    </a>
+                    <a href="#contact" class="text-gray-600 hover:text-primary transition-custom">
+                        <span class="lang-zh">联系我</span>
+                        <span class="lang-en">Contact</span>
+                    </a>
+                </div>
+                <!-- 语言切换按钮 -->
+                <button id="lang-toggle" class="flex items-center text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full transition-custom">
+                    <span class="lang-zh mr-1">EN</span>
+                    <span class="lang-en mr-1">中文</span>
+                    <i class="fa fa-globe text-xs"></i>
+                </button>
+                <button class="md:hidden text-gray-600" id="menu-toggle">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#about" class="py-2 text-gray-600 hover:text-primary transition-custom">
+                    <span class="lang-zh">关于我</span>
+                    <span class="lang-en">About</span>
+                </a>
+                <a href="#skills" class="py-2 text-gray-600 hover:text-primary transition-custom">
+                    <span class="lang-zh">技能</span>
+                    <span class="lang-en">Skills</span>
+                </a>
+                <a href="#projects" class="py-2 text-gray-600 hover:text-primary transition-custom">
+                    <span class="lang-zh">项目</span>
+                    <span class="lang-en">Projects</span>
+                </a>
+                <a href="#contact" class="py-2 text-gray-600 hover:text-primary transition-custom">
+                    <span class="lang-zh">联系我</span>
+                    <span class="lang-en">Contact</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <header class="pt-32 pb-20 bg-gradient-to-br from-blue-50 to-indigo-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="mb-8 md:mb-0 md:mr-10">
+                    <!-- 使用GitHub头像链接，将yourusername替换为实际GitHub用户名 -->
+                    <img src="https://github.com/ZhoraZhang.png" alt="张昊晨的GitHub头像" class="w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg">
+                </div>
+                <div class="text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4 text-shadow">
+                        <span class="lang-zh">你好，我是张昊晨！</span>
+                        <span class="lang-en">Hello, I'm Zhang Haochen!</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-6 max-w-lg">
+                        <span class="lang-zh">博士生 & 开发者，专注于数值方法、计算技术和人工智能领域。</span>
+                        <span class="lang-en">PhD Student & Developer specializing in numerical methods, computational technologies and AI.</span>
+                    </p>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                        <a href="#projects" class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg transition-custom">
+                            <span class="lang-zh">查看我的项目</span>
+                            <span class="lang-en">View My Projects</span>
+                        </a>
+                        <a href="#contact" class="bg-white hover:bg-gray-100 text-primary border border-primary px-6 py-3 rounded-lg transition-custom">
+                            <span class="lang-zh">联系我</span>
+                            <span class="lang-en">Contact Me</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-16">
+        <!-- 关于我 -->
+        <section id="about" class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="lang-zh">关于我</span>
+                <span class="lang-en">About Me</span>
+            </h2>
+            <div class="bg-white rounded-xl shadow-md p-8 max-w-3xl mx-auto">
+                <p class="text-lg text-gray-700 mb-4 lang-zh">
+                    欢迎来到我的主页。我是一名莫斯科物理技术学院的博士生，同时也是一名开发者，对数值方法、计算技术和人工智能有着浓厚的兴趣。
+                </p>
+                <p class="text-lg text-gray-700 mb-4 lang-en">
+                    Welcome to my portfolio. I'm a PhD student from MIPT and a developer with a strong interest in numerical methods, computational technologies, and AI.
+                </p>
+                
+                <p class="text-lg text-gray-700 mb-4 lang-zh">
+                    我的研究主要集中在开发高效的数值算法，用于解决空气动力学问题。同时，我也致力于研究人工智能在基于模型的系统工程领域（MBSE）的应用，为工业设计探索新的解决方案。
+                </p>
+                <p class="text-lg text-gray-700 mb-4 lang-en">
+                    My research focuses on developing efficient numerical algorithms for solving gas dynamics problems. I'm also dedicated to studying usage of AI on model-based system engineering (MBSE) domain to explore new solutions for industrial design.
+                </p>
+                
+            </div>
+        </section>
+
+        <!-- 技能 -->
+        <section id="skills" class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="lang-zh">我的技能</span>
+                <span class="lang-en">My Skills</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 技能卡片 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-md hover-lift">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-code"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span class="lang-zh">编程语言</span>
+                        <span class="lang-en">Programming Languages</span>
+                    </h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center"><i class="fa fa-check text-secondary mr-2"></i> Python</li>
+                        <li class="flex items-center"><i class="fa fa-check text-secondary mr-2"></i> C/C++</li>
+                    </ul>
+                </div>
+
+                <!-- 技能卡片 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-md hover-lift">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-cogs"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span class="lang-zh">技术领域</span>
+                        <span class="lang-en">Technical Fields</span>
+                    </h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center"><i class="fa fa-check text-secondary mr-2"></i>
+                            <span class="lang-zh">数值方法</span>
+                            <span class="lang-en">Numerical Methods</span>
+                        </li>
+                        <li class="flex items-center"><i class="fa fa-check text-secondary mr-2"></i>
+                            <span class="lang-zh">科学计算</span>
+                            <span class="lang-en">Scientific Computing</span>
+                        </li>
+                        <li class="flex items-center"><i class="fa fa-check text-secondary mr-2"></i>
+                            <span class="lang-zh">空气动力学过程建模</span>
+                            <span class="lang-en">Gas dynamics process modeling</span>
+                        </li>
+                        <li class="flex items-center"><i class="fa fa-check text-secondary mr-2"></i>
+                            <span class="lang-zh">大模型微调&部署</span>
+                            <span class="lang-en">LLM fine-tuning & deployment</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 技能卡片 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-md hover-lift">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-tools"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span class="lang-zh">工具与框架</span>
+                        <span class="lang-en">Tools & Frameworks</span>
+                    </h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center"><i class="fa fa-check text-secondary mr-2"></i> TensorFlow/PyTorch</li>
+                        <li class="flex items-center"><i class="fa fa-check text-secondary mr-2"></i> NumPy/SciPy</li>
+                        <li class="flex items-center"><i class="fa fa-check text-secondary mr-2"></i> Git/GitHub</li>
+                        <li class="flex items-center"><i class="fa fa-check text-secondary mr-2"></i> Docker</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 项目 -->
+<!--         <section id="projects" class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="lang-zh">我的项目</span>
+                <span class="lang-en">My Projects</span>
+            </h2>
+            
+            <!-- 项目1 -->
+            <div class="project bg-white rounded-xl shadow-md overflow-hidden mb-8 hover-lift">
+                <div class="md:flex">
+                    <div class="md:w-1/3">
+                        <img src="https://picsum.photos/id/180/600/400" alt="气体动力学求解器项目截图" class="h-full w-full object-cover">
+                    </div>
+                    <div class="p-6 md:w-2/3">
+                        <h3 class="text-2xl font-semibold mb-2">Gas Dynamics Solver using DFM with Adaptive Artificial Viscosity</h3>
+                        
+                        <p class="text-gray-600 mb-4 lang-zh">
+                            基于间断有限元方法(DFM)并结合自适应人工粘性的气体动力学求解器，用于模拟高超声速流动和激波现象。该求解器能够有效捕捉流场中的强间断，并在保持精度的同时提高计算稳定性。
+                        </p>
+                        <p class="text-gray-600 mb-4 lang-en">
+                            A gas dynamics solver based on Discontinuous Finite Element Method (DFM) with adaptive artificial viscosity, designed for simulating hypersonic flows and shock wave phenomena. This solver effectively captures strong discontinuities in flow fields while maintaining accuracy and improving computational stability.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">C++</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">
+                                <span class="lang-zh">计算流体力学</span>
+                                <span class="lang-en">CFD</span>
+                            </span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">
+                                <span class="lang-zh">有限元方法</span>
+                                <span class="lang-en">Finite Element Method</span>
+                            </span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">
+                                <span class="lang-zh">科学计算</span>
+                                <span class="lang-en">Scientific Computing</span>
+                            </span>
+                        </div>
+                        
+                        <a href="#" class="text-primary hover:text-primary/80 flex items-center">
+                            <span class="lang-zh">查看项目</span>
+                            <span class="lang-en">View Project</span>
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 项目2 -->
+            <div class="project bg-white rounded-xl shadow-md overflow-hidden mb-8 hover-lift">
+                <div class="md:flex">
+                    <div class="md:w-1/3">
+                        <img src="https://picsum.photos/id/0/600/400" alt="基于AI的MBSE工具项目截图" class="h-full w-full object-cover">
+                    </div>
+                    <div class="p-6 md:w-2/3">
+                        <h3 class="text-2xl font-semibold mb-2">AI-Based MBSE Tool</h3>
+                        
+                        <p class="text-gray-600 mb-4 lang-zh">
+                            基于人工智能的模型基系统工程(MBSE)工具，结合自然语言处理和知识图谱技术，实现系统需求的自动提取、模型的智能构建和一致性验证。该工具旨在提高复杂系统开发的效率和质量。
+                        </p>
+                        <p class="text-gray-600 mb-4 lang-en">
+                            An Artificial Intelligence-based Model-Based Systems Engineering (MBSE) tool that combines natural language processing and knowledge graph technologies to enable automatic extraction of system requirements, intelligent model construction, and consistency verification. This tool aims to improve the efficiency and quality of complex system development.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Python</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">
+                                <span class="lang-zh">机器学习</span>
+                                <span class="lang-en">Machine Learning</span>
+                            </span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">
+                                <span class="lang-zh">系统工程</span>
+                                <span class="lang-en">Systems Engineering</span>
+                            </span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">
+                                <span class="lang-zh">知识图谱</span>
+                                <span class="lang-en">Knowledge Graph</span>
+                            </span>
+                        </div>
+                        
+                        <a href="#" class="text-primary hover:text-primary/80 flex items-center">
+                            <span class="lang-zh">查看项目</span>
+                            <span class="lang-en">View Project</span>
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- 联系 -->
+        <section id="contact" class="mb-10">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="lang-zh">联系我</span>
+                <span class="lang-en">Contact Me</span>
+            </h2>
+            <div class="bg-white rounded-xl shadow-md p-8 max-w-2xl mx-auto">
+                <p class="text-center text-gray-700 mb-8 lang-zh">
+                    对我的项目感兴趣？有合作意向？请随时联系我！
+                </p>
+                <p class="text-center text-gray-700 mb-8 lang-en">
+                    Interested in my projects or looking for collaboration? Feel free to contact me!
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <a href="mailto:your.email@example.com" class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-custom">
+                        <div class="text-primary text-xl mr-4">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">
+                                <span class="lang-zh">电子邮件</span>
+                                <span class="lang-en">Email</span>
+                            </h4>
+                            <p class="text-gray-600">your.email@example.com</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://github.com/yourusername" target="_blank" class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-custom">
+                        <div class="text-primary text-xl mr-4">
+                            <i class="fa fa-github"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">GitHub</h4>
+                            <p class="text-gray-600">github.com/yourusername</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://linkedin.com/in/yourusername" target="_blank" class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-custom">
+                        <div class="text-primary text-xl mr-4">
+                            <i class="fa fa-linkedin"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">LinkedIn</h4>
+                            <p class="text-gray-600">linkedin.com/in/yourusername</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://twitter.com/yourusername" target="_blank" class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-custom">
+                        <div class="text-primary text-xl mr-4">
+                            <i class="fa fa-twitter"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Twitter</h4>
+                            <p class="text-gray-600">@yourusername</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <h3 class="text-xl font-bold mb-4">
+                    <span class="lang-zh">张昊晨 Zhang Haochen</span>
+                    <span class="lang-en">Zhang Haochen 张昊晨</span>
+                </h3>
+                <p class="text-gray-400 mb-6">
+                    <span class="lang-zh">博士生 & 开发者</span>
+                    <span class="lang-en">PhD Student & Developer</span>
+                </p>
+                <div class="flex justify-center space-x-4 mb-6">
+                    <a href="https://github.com/yourusername" target="_blank" class="text-gray-400 hover:text-white transition-custom">
+                        <i class="fa fa-github text-xl"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/yourusername" target="_blank" class="text-gray-400 hover:text-white transition-custom">
+                        <i class="fa fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="https://twitter.com/yourusername" target="_blank" class="text-gray-400 hover:text-white transition-custom">
+                        <i class="fa fa-twitter text-xl"></i>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">
+                    <span class="lang-zh">© 2023 张昊晨. 保留所有权利.</span>
+                    <span class="lang-en">© 2023 Zhang Haochen. All rights reserved.</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 语言切换功能
+        document.getElementById('lang-toggle').addEventListener('click', function() {
+            const zhElements = document.querySelectorAll('.lang-zh');
+            const enElements = document.querySelectorAll('.lang-en');
+            
+            zhElements.forEach(el => {
+                el.style.display = el.style.display === 'none' ? 'inline' : 'none';
+            });
+            
+            enElements.forEach(el => {
+                el.style.display = el.style.display === 'none' ? 'inline' : 'none';
+            });
+            
+            // 更新页面语言属性
+            const html = document.documentElement;
+            html.lang = html.lang === 'zh-CN' ? 'en' : 'zh-CN';
+            
+            // 更新页面标题
+            document.title = html.lang === 'zh-CN' ? '张昊晨 | 个人主页' : 'Zhang Haochen | Personal Page';
+        });
+
+        // 移动端菜单切换
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动菜单（如果打开）
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2', 'shadow');
+                nav.classList.remove('py-3');
+            } else {
+                nav.classList.add('py-3');
+                nav.classList.remove('py-2', 'shadow');
+            }
+        });
+
+        // 添加页面加载动画
+        document.body.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+        window.addEventListener('load', function() {
+            document.body.classList.add('opacity-100');
+            document.body.classList.remove('opacity-0');
+        });
+    </script>
 </body>
 </html>
+    
